@@ -1,0 +1,713 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyZZ</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Use column layout */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4; /* WhatsApp background color */
+            font-family: Arial, sans-serif;
+        }
+
+        .animated-text {
+            background: 50% 100% / 50% 50% no-repeat radial-gradient(ellipse at bottom, #002852, #6e6e6e, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 5vw; /* Smaller font size */
+            font-family: "Source Sans Pro", sans-serif;
+            animation: reveal 3000ms ease-in-out forwards 200ms, glow 2500ms linear infinite 2000ms;
+            margin-top: 300px;
+            text-align: center; /* Center the text */
+        }
+
+        @keyframes reveal {
+            80% {
+                letter-spacing: 10px; /* Adjusted letter spacing */
+            }
+            100% {
+                background-size: 300% 300%;
+            }
+        }
+
+        @keyframes glow {
+            40% {
+                text-shadow: 0 0 8px #B0C4DE, 0 0 15px #b0b0b0; /* Grey luminescence */
+            }
+        }
+
+        header {
+             background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2.5rem; /* Larger header text */
+            line-height: 1.2;
+            filter: drop-shadow(0px 0px 10px rgba(0,0,0, 0.5));
+        }
+
+        .nav-bar {
+            margin-top: 10px;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-bar a:hover {
+            background-color: #3C8DAD;
+            color: #fff;
+        }
+
+#chat-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 10px auto 40px; /* Margin for spacing */
+    padding: 10px;
+    background-color: #e5ddd5; /* White background for chat */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    position: relative; /* Required for positioning input box */
+    margin-bottom: 20px;
+}
+
+#history {
+    border: none;
+    padding: 10px;
+    margin-bottom: 60px; /* Space for input area */
+    overflow-y: auto;
+    flex: 1; /* Take up remaining space */
+}
+
+.chat-bubble {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.user-bubble {
+    background-color: #B0C4DE; /* Light blue for user */
+    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 10px; /* Optional: Space from container edge */
+}
+
+.model-bubble {
+    
+    background-color: #ffffff; /* White for model */
+    align-self: flex-start;
+    margin-right: auto;
+    margin-left: 10px; /* Optional: Space from container edge */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+        #userinput {
+            width: calc(100% - 160px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            height: 20px;
+        }
+
+        #send-button, #start-button {
+            width: 80px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #3C8DAD; 
+            color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            transition: background-color 0.3s;
+        }
+
+        #send-button:hover, #start-button:hover {
+            background-color: #128C7E; /* Darker green on hover */
+        }
+
+        .input-box {
+             max-width: 610px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            margin-left: -20px;
+
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #ffffff; /* Ensure background color is same as chat container */
+            box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+             border-radius: 20px;
+        }
+/* Custom scrollbar styles for webkit browsers (Chrome, Safari) */
+#history::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+#history::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners of the scrollbar track */
+}
+
+#history::-webkit-scrollbar-thumb {
+    background: #B0C4DE; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners of the scrollbar thumb */
+    transition: background 0.3s; /* Smooth transition for hover effect */
+}
+
+#history::-webkit-scrollbar-thumb:hover {
+    background: #3C8DAD; /* Color of the scrollbar thumb on hover */
+}
+
+ footer {
+             background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            
+
+        }
+.dropdowns-container {
+    position: fixed; /* Fixed positioning */
+    top: 20px; /* Adjust top spacing */
+    left: 20px; /* Adjust left spacing */
+    width: 250px; /* Match width to input box */
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* Match background color */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    padding: 10px;
+    margin-top: 140px; /* Space between dropdowns */
+    box-sizing: border-box; /* Include padding in width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    background-color: #e5ddd5;
+}
+
+.dropdowns-container select {
+    width: 100%; /* Ensure dropdowns take full width */
+    padding: 5px; /* Match padding of input box */
+    border-radius: 20px; /* Rounded corners for dropdowns */
+    border: 1px solid #ccc; /* Border color */
+    box-sizing: border-box; /* Include padding and border in width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+
+.dropdowns-container2 {
+    position: fixed; /* Fixed positioning */
+    top: 20px; /* Adjust top spacing */
+    right: 20px; /* Adjust left spacing */
+    width: 250px; /* Match width to input box */
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* Match background color */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1); /* Match box shadow */
+    padding: 10px;
+    margin-top: 140px; /* Space between dropdowns */
+    box-sizing: border-box; /* Include padding in width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    background-color: #e5ddd5;
+}
+
+.dropdowns-container2 select {
+    width: 100%; /* Ensure dropdowns take full width */
+    padding: 5px; /* Match padding of input box */
+    border-radius: 20px; /* Rounded corners for dropdowns */
+    border: 1px solid #ccc; /* Border color */
+    box-sizing: border-box; /* Include padding and border in width */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+
+
+        .parent-container {
+            max-width: 1200px;
+            margin: 300px auto 0; /* Margin adjusted for fixed header */
+            animation: fadeIn 1s ease-in-out;
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: #e5ddd5;
+            margin-top: 20px;
+           
+        }
+
+         .employee-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .employee-card strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .employee-card p {
+            margin: 5px 0;
+        }
+
+        .employee-card .contact-info {
+            color: #0077B6;
+            font-size: 1rem;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+
+        .employee-card .contact-info:hover {
+            text-decoration: underline;
+        }
+
+        .graph-section img, .plot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>MoneyZZ, money made easy</h1>
+            <nav class="nav-bar">
+                <a href="/about">About</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/social">Social Media</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="animated-text">AI-FinBot</div>
+ <div id="chat-container">
+        <div id="history">
+            {% for message in chat_history %}
+            {% if (loop.index - 1) % 3 != 0 %}
+                <div class="chat-bubble {% if message.role == 'user' %}user-bubble{% else %}model-bubble{% endif %}">
+                    {% for part in message.parts %}
+                        <p>{{ part.text }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endfor %}
+        
+
+        <!-- Chat form and input -->
+        <form action="/chat" method="POST">
+            <div class="input-box">
+                <button type="button" id="start-button">Speak</button>
+                <textarea id="userinput" name="user_input" placeholder="Type a message...">{{ user_input }}</textarea>
+                <button id="send-button" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="dropdowns-container">
+    <h3>Click to add Questions -> </h3>
+    <select class="dropdown" id="financial-dropdown">
+        <option value="">--  Financial Questions --</option>
+        <option value="What is financial planning?">What is financial planning?</option>
+        <option value="How can I improve my financial health?">How can I improve my financial health?</option>
+        <option value="What is a financial advisor?">What is a financial advisor?</option>
+        <option value="How do I create a financial plan?">How do I create a financial plan?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="income-dropdown">
+        <option value="">--  Income Questions --</option>
+        <option value="How can I increase my income?">How can I increase my income?</option>
+        <option value="What is passive income?">What is passive income?</option>
+        <option value="What are the best side hustles?">What are the best side hustles?</option>
+        <option value="How can I diversify my income streams?">How can I diversify my income streams?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="budget-dropdown">
+        <option value="">--  Budget Questions --</option>
+        <option value="How do I create a budget?">How do I create a budget?</option>
+        <option value="What is the 50/30/20 budget rule?">What is the 50/30/20 budget rule?</option>
+        <option value="How can I stick to my budget?">How can I stick to my budget?</option>
+        <option value="What are some budget tracking tools?">What are some budget tracking tools?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="stock-dropdown">
+        <option value="">--  Stock Market Questions --</option>
+        <option value="What are stocks?">What are stocks?</option>
+        <option value="How do I buy and sell stocks?">How do I buy and sell stocks?</option>
+        <option value="What is a stock portfolio?">What is a stock portfolio?</option>
+        <option value="What are dividends?">What are dividends?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="investment-dropdown">
+        <option value="">--  Investment Questions --</option>
+        <option value="What is the best way to invest my money?">What is the best way to invest my money?</option>
+        <option value="What are the risks of investing?">What are the risks of investing?</option>
+        <option value="What is diversification?">What is diversification?</option>
+        <option value="What are mutual funds?">What are mutual funds?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="market-dropdown">
+        <option value="">-- Market Analysis Questions --</option>
+        <option value="What is market analysis?">What is market analysis?</option>
+        <option value="How do I analyze a stock?">How do I analyze a stock?</option>
+        <option value="What are technical indicators?">What are technical indicators?</option>
+        <option value="What is fundamental analysis?">What is fundamental analysis?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="expenses-dropdown">
+        <option value="">--  Expenses Questions --</option>
+        <option value="How can I manage my expenses better?">How can I manage my expenses better?</option>
+        <option value="What are common expense categories?">What are common expense categories?</option>
+        <option value="How do I track my expenses?">How do I track my expenses?</option>
+        <option value="What is a spending plan?">What is a spending plan?</option>
+    </select>
+    <br><br>
+    <select class="dropdown" id="savings-dropdown">
+        <option value="">--  Savings Questions --</option>
+        <option value="How much should I save every month?">How much should I save every month?</option>
+        <option value="What is an emergency fund?">What is an emergency fund?</option>
+        <option value="How can I set savings goals?">How can I set savings goals?</option>
+        <option value="What are high-yield savings accounts?">What are high-yield savings accounts?</option>
+    </select>
+</div>
+
+
+
+
+<div class="dropdowns-container2">
+    <h3>Click to add Questions -> </h3>
+    <select class="dropdown2" id="debt-dropdown">
+        <option value="">--  Debt Management Questions --</option>
+        <option value="How can I create a plan to pay off my credit card debt faster?">How can I create a plan to pay off my credit card debt faster?</option>
+        <option value="What are some effective methods for consolidating student loans?">What are some effective methods for consolidating student loans?</option>
+        <option value="How can I negotiate lower interest rates on my existing loans?">How can I negotiate lower interest rates on my existing loans?</option>
+        <option value="What steps should I take if I’m struggling with overwhelming debt?">What steps should I take if I’m struggling with overwhelming debt?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="retirement-dropdown">
+        <option value="">--  Retirement Planning Questions --</option>
+        <option value="What are the different types of retirement accounts and their benefits?">What are the different types of retirement accounts and their benefits?</option>
+        <option value="How can I calculate the amount I need to save for retirement?">How can I calculate the amount I need to save for retirement?</option>
+        <option value="What factors should I consider when choosing between a traditional IRA and a Roth IRA?">What factors should I consider when choosing between a traditional IRA and a Roth IRA?</option>
+        <option value="How can I plan for healthcare expenses in retirement?">How can I plan for healthcare expenses in retirement?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="insurance-dropdown">
+        <option value="">--  Insurance Questions --</option>
+        <option value="What is the difference between term and whole life insurance?">What is the difference between term and whole life insurance?</option>
+        <option value="How can I determine the amount of life insurance coverage I need?">How can I determine the amount of life insurance coverage I need?</option>
+        <option value="What factors should I consider when choosing auto insurance?">What factors should I consider when choosing auto insurance?</option>
+        <option value="How do I evaluate the adequacy of my current health insurance plan?">How do I evaluate the adequacy of my current health insurance plan?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="taxation-dropdown">
+        <option value="">--  Taxation Questions --</option>
+        <option value="What are some common tax deductions that individuals often overlook?">What are some common tax deductions that individuals often overlook?</option>
+        <option value="How can I effectively track and document expenses for tax purposes?">How can I effectively track and document expenses for tax purposes?</option>
+        <option value="What are the benefits of contributing to a retirement account from a tax perspective?">What are the benefits of contributing to a retirement account from a tax perspective?</option>
+        <option value="How can I avoid common tax filing mistakes?">How can I avoid common tax filing mistakes?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="estate-dropdown">
+        <option value="">-- Estate Planning Questions --</option>
+        <option value="What are the key components of a basic estate plan?">What are the key components of a basic estate plan?</option>
+        <option value="How do I decide between creating a will or a trust?">How do I decide between creating a will or a trust?</option>
+        <option value="What is the role of an executor in managing an estate?">What is the role of an executor in managing an estate?</option>
+        <option value="How can I ensure that my estate plan reflects my current wishes?">How can I ensure that my estate plan reflects my current wishes?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="credit-dropdown">
+        <option value="">--  Credit Management Questions --</option>
+        <option value="How can I build and maintain a good credit history?">How can I build and maintain a good credit history?</option>
+        <option value="What are the most effective ways to improve a low credit score?">What are the most effective ways to improve a low credit score?</option>
+        <option value="How can I dispute inaccuracies on my credit report?">How can I dispute inaccuracies on my credit report?</option>
+        <option value="What are the potential impacts of closing a credit account on my credit score?">What are the potential impacts of closing a credit account on my credit score?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="wealth-dropdown">
+        <option value="">--  Wealth Management Questions --</option>
+        <option value="What strategies can I use to diversify my investment portfolio?">What strategies can I use to diversify my investment portfolio?</option>
+        <option value="How can I balance risk and return in my investment strategy?">How can I balance risk and return in my investment strategy?</option>
+        <option value="What are some effective ways to plan for large financial goals, like buying a house or funding education?">What are some effective ways to plan for large financial goals, like buying a house or funding education?</option>
+        <option value="How do I assess and manage my overall financial health?">How do I assess and manage my overall financial health?</option>
+    </select>
+    <br><br>
+    <select class="dropdown2" id="goals-dropdown">
+        <option value="">--  Financial Goals and Planning Questions --</option>
+        <option value="How can I set realistic short-term and long-term financial goals?">How can I set realistic short-term and long-term financial goals?</option>
+        <option value="What strategies can I use to stay motivated and on track with my financial goals?">What strategies can I use to stay motivated and on track with my financial goals?</option>
+        <option value="How can I adjust my financial plan to accommodate life changes, such as marriage or having children?">How can I adjust my financial plan to accommodate life changes, such as marriage or having children?</option>
+        <option value="What steps should I take to evaluate and revise my financial goals periodically?">What steps should I take to evaluate and revise my financial goals periodically?</option>
+    </select>
+</div>
+
+
+
+
+
+<!-- Parent container for both sections -->
+<div id="parent-container" class="parent-container">
+ <form action="/oneui" method="POST">   
+    <!-- Form section -->
+    <div class="container form-section">
+        <h2>Stock Price Prediction</h2>
+        <input type="hidden" id="response-ready" value="{{ response_ready }}">
+          
+            
+       
+        {% if future_price %}
+        <div class="employee-card">
+            <strong>Predicted Price for {{ ticker }} on {{ future_date }}:</strong>
+            <p>{{ future_price }}</p>
+        </div>
+        {% endif %}
+
+        {% if price_range %}
+        <div class="employee-card">
+            <strong>Price Range:</strong>
+            <p>Prediction: {{ prediction }}</p>
+            <p>Minimum Price: {{ price_range['Minimum Price'] }}</p>
+            <p>Maximum Price: {{ price_range['Maximum Price'] }}</p>
+            <p>Average Price: {{ price_range['Average Price'] }}</p>
+        </div>
+        {% else %}
+        <div class="employee-card">
+            <p>No price range data available.</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="container form-section">
+        <h2>Indicator Graph for {{ symbol }}</h2>
+        <div class="plot-container">
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Stock Price and Indicators">
+        </div>
+    </div>
+
+    <div class="container form-section">
+        <h2>Stock Metrics for {{ ticker }}</h2>
+        <div class="employee-card">
+            <strong>Metrics:</strong>
+            <p><strong>PE Ratio:</strong> {{ pe_ratio }} <strong>NOPAT/Total Invested Capital:</strong> {{ nopat_tic }}</p>
+            <p><strong>EPS:</strong> {{ eps }} <strong>CapEx/Sales:</strong> {{ capex_sales }}</p>
+            <p><strong>Debt to Equity:</strong> {{ de_ratio }} <strong>PAT:</strong> {{ pat }}</p>
+            <p><strong>ROE:</strong> {{ roe }} <strong>Beta:</strong> {{ beta }}</p>
+            <p><strong>Dividend Yield:</strong> {{ dividend_yield }}% <strong>Market Cap:</strong> {{ market_cap }}</p>
+        </div>
+    </div>
+
+    <div class="container graph-section">
+        <h2>Parameters graph for {{ ticker }}</h2>
+        {% if graph_url %}
+        <img src="{{ graph_url }}" alt="Stock Price Prediction Graph">
+        {% endif %}
+    </div>
+</form>
+
+ <div class="employee-card">
+<BUTTON id="backButton">Back to FinBot</BUTTON>
+</div>
+
+</div>
+
+
+
+    <footer>
+        <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const startButton = document.getElementById('start-button');
+        const sendButton = document.getElementById('send-button'); // Assuming there's a send button
+        const userinput = document.getElementById('userinput');
+        const parentContainer = document.getElementById('parent-container');
+        const responseReady = document.getElementById('response-ready').value;
+        const container1 = document.querySelector('.dropdowns-container');
+        const container2 = document.querySelector('.dropdowns-container2');
+
+        // Keywords to trigger container display
+        const similarWords = ['forecasts', 'projections', 'estimates', 'expectations', 'predictions', 'speculations'];
+
+        // Only execute the textbox prediction check after the Flask response is ready
+        if (responseReady === 'True') {
+            let timeoutId;
+
+            userinput.addEventListener('input', function() {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(function() {
+                    const userInput = userinput.value.toLowerCase();
+
+                    // Show or hide parentContainer based on keyword detection
+                    if (similarWords.some(word => userInput.includes(word))) {
+                        parentContainer.style.display = 'block';
+                        container1.style.display = 'none';
+                        container2.style.display = 'none';
+                    } else {
+                        parentContainer.style.display = 'none';
+                    }
+                }, 1000);
+            });
+        }
+
+        // Add click event to send button
+        sendButton.addEventListener('click', function() {
+            const userInput = userinput.value.toLowerCase();
+
+            // Check for similar words in the input when send button is clicked
+            if (similarWords.some(word => userInput.includes(word))) {
+                parentContainer.style.display = 'block';
+                container1.style.display = 'none';
+                container2.style.display = 'none';
+            } else {
+                parentContainer.style.display = 'none';
+            }
+        });
+
+        // Speech recognition code
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = () => {
+                startButton.innerText = 'Listening...';
+                startButton.disabled = true;
+            };
+
+            recognition.onresult = (event) => {
+                if (event.results.length > 0 && event.results[0].length > 0) {
+                    const transcript = event.results[0][0].transcript;
+                    userinput.value = transcript;
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                alert('An error occurred: ' + event.error);
+                startButton.innerText = 'Speak';
+                startButton.disabled = false;
+            };
+
+            recognition.onend = () => {
+                startButton.innerText = 'Speak';
+                startButton.disabled = false;
+            };
+
+            startButton.addEventListener('click', () => {
+                recognition.start();
+            });
+        } else {
+            startButton.innerText = 'Speech not supported';
+            startButton.disabled = true;
+        }
+
+        // Function to handle question selection from dropdowns
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('change', function() {
+                if (this.value) {
+                    userinput.value += this.value + ' '; // Append selected question to user input
+                    this.selectedIndex = 0; // Reset dropdown to placeholder
+                }
+            });
+        });
+
+        const dropdowns2 = document.querySelectorAll('.dropdown2');
+        dropdowns2.forEach(dropdown2 => {
+            dropdown2.addEventListener('change', function() {
+                if (this.value) {
+                    userinput.value += this.value + ' ';
+                    this.selectedIndex = 0;
+                }
+            });
+        });
+
+        // Back button functionality
+        const backButton = document.getElementById('back-button'); // Assuming there's a back button
+        backButton.addEventListener('click', () => {
+            parentContainer.style.display = 'none';
+            container1.style.display = 'flex';
+            container2.style.display = 'flex';
+        });
+    });
+</script>
+
+</body>
+</html>

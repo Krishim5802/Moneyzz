@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+        /* General Styles */
+        body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column; /* Allow footer to be positioned at the bottom */
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      overflow: hidden; /* Prevent scrolling */
+    }
+    header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      
+      height: 60px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin-top: -5px;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+  
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+    .container {
+      display: flex;
+      width: 100%; /* Make container full width */
+      max-width: 1100px; /* Max width for large screens */
+      height: 550px;
+      border-radius: 8px;
+      overflow: hidden;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      position: relative; /* Ensure container is positioned normally */
+      z-index: 2; /* Keep the container above the header */
+      margin-top: 30px; /* Space below header for container */
+    }
+    .login-section {
+      flex: 1;
+      background-color: #FFFFFF; /* White background for the login section */
+      padding: 2rem;
+    }
+    .button-container {
+    margin-top: 20px;
+    text-align: center; /* Center align buttons */
+       
+}
+        
+      
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-bar a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .contact-container {
+            width: 90%;
+            flex-direction: column;
+          }
+
+          .contact-form, .employee-details {
+            margin: 0;
+            margin-bottom: 20px;
+          }
+        }
+        footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: fixed; /* Position footer at the bottom */
+      bottom: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-content">
+      <img style="width: 200px; padding: 0; margin-left: -40px;" src="{{ url_for('static', filename='logo_pic.jpg') }}" alt="MoneyZZ Logo" >
+
+      <h1>MoneyZZ, money made easy</h1>
+      <nav class="nav-bar">
+        <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+      </nav>
+    </div>
+  </header>
+
+
+
+<!-- Contact Us Form -->
+<div class="container">
+<div class="login-section">
+    <strong style="font-size: 26px; margin-top: 1px">Disclaimer and Risk Warning</strong><br><br>
+    <p>
+    <strong>1. No Financial Advice</strong><br>
+    The information provided on this website, including any financial analysis, predictions, or recommendations, is for informational purposes only. It does not constitute financial advice, investment advice, or any form of professional advice. Always consult with a qualified financial advisor before making any investment decisions.<br><br>
+
+    <strong>2. Risk Disclosure</strong><br>
+    Investing in financial markets involves substantial risks, including the risk of losing capital. The predictions and insights provided by our AI tools are based on historical data and algorithms and may not accurately predict future performance. Past performance is not indicative of future results.<br><br>
+
+    <strong>3. Accuracy of Information</strong><br>
+    While we strive to provide accurate and up-to-date information, we cannot guarantee the accuracy, completeness, or timeliness of the content on this website. The information may be subject to change without notice.<br><br>
+
+    <strong>4. No Guarantee of Returns</strong><br>
+    Our financial AI tools and predictions are not guaranteed to yield profits or prevent losses. The use of our tools and information is at your own risk. We do not assume any responsibility or liability for any financial losses or damages incurred as a result of using this website.<br><br>
+
+    <strong>5. Third-Party Links</strong><br>
+    This website may contain links to third-party websites or services. We do not endorse or assume responsibility for the content, products, or services provided by these third parties. Your use of third-party sites is at your own risk.<br><br>
+
+    <strong>6. Data Privacy</strong><br>
+    We are committed to protecting your privacy. Please review our Privacy Policy to understand how we collect, use, and protect your personal information.<br><br>
+
+    <strong>7. Compliance with Laws</strong><br>
+    By using this website, you agree to comply with all applicable laws and regulations. It is your responsibility to ensure that your use of this website and any transactions conducted through it are in accordance with your local laws.<br><br>
+
+ <strong>8. This is a college level - project</strong><br>
+    <strong>We are as of now making this project in order to gain more experience in the IT domain as well as the Financial domain, please be mindful while using this and we are open to feedbacks through our contact info, i hope you have a satisfactory time :)</strong><br><br>
+
+    <strong>9. Changes to This Disclaimer</strong><br>
+    We may update this disclaimer from time to time. Any changes will be posted on this page, and your continued use of the website after any changes indicates your acceptance of the revised disclaimer.
+  </p>
+</div>
+</div>
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+
+<script>
+setTimeout(function() {
+    document.querySelector('.animated-title').style.display = 'none'; // Hide animated title
+    document.querySelector('.contact-container').style.display = 'flex'; // Show contact container
+    document.querySelector('footer').style.display = 'block'; // Show footer
+    document.querySelector('.header-content').style.display = 'block'; // Show header content
+    document.querySelector('.nav-bar').style.display = 'block'; // Show navigation bar
+}, 3000);
+</script>
+
+</body>
+</html>

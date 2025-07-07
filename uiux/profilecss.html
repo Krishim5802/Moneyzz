@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      font-family: 'Roboto', 'Inter', sans-serif;
+      flex-direction: column;/* Allow footer to be positioned at the bottom */
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      
+    }
+        header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      padding: 20px; /* Space around content */
+      height: ;
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+
+    footer {
+        background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+        color: white;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Card container */
+    .card-container {
+        display: relative;
+        width: 100%; /* Make container full width */
+      max-width: 1100px; /* Max width for large screens */
+      height: 540px;
+      border-radius: 8px;
+        max-width: 1200px;
+        margin: 5px auto; /* Adjust the margin as per your header height */
+        padding: 20px;
+        overflow: hidden;
+        background-color: #e5ddd5;
+        border-radius: 8px;
+
+    }
+
+    .employee-card {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+
+        max-width: 100%;
+    }
+
+    .employee-card strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .employee-card p {
+        margin: 5px 0;
+    }
+
+    .employee-card .contact-info {
+        color: #0077B6;
+        font-size: 1rem;
+        text-decoration: none;
+        display: block;
+        margin: 5px 0;
+    }
+
+    .employee-card .contact-info:hover {
+        text-decoration: underline;
+    }
+
+      .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px; /* Adjust as needed to center vertically */
+}
+    .contact-container {
+    margin-top: 100px; /* Move the form down */
+    
+    flex-direction: column;
+    align-items: center;
+}
+
+
+button {
+    width: 200px;
+    padding: 12px;
+    border-radius: 20px;
+            cursor: pointer;
+            background-color: #3C8DAD;
+    color: white;
+    border: none;
+    
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #3C8DAD;
+    transform: scale(1.05);
+}
+h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+          font-size: 2rem;
+          color: #002852;
+          margin-bottom: 20px;
+          margin: 20px auto;
+          margin-top: 40px;
+        }
+</style>
+<script>
+    function updateProfile() {
+        const user_id = document.getElementById('user_id').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const age = document.getElementById('age').value;
+        const income = document.getElementById('income').value;
+        const expenditure = document.getElementById('expenditure').value;
+        const risk = document.getElementById('risk').value;
+        const profession = document.getElementById('profession').value;
+
+        fetch(`/profile/${user_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, age, expenditure, risk, income, profession }),
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Profile updated successfully!');
+            } else {
+                alert(data.error || 'Failed to update profile.');
+            }
+        })
+        .catch(error => {
+            alert('Error updating profile: ' + error.message);
+        });
+    }
+</script>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+        </nav>
+    </div>
+</header>
+
+<div class="contact-container" id="contactContainer">
+    
+    <form onsubmit="event.preventDefault(); updateProfile();">
+        <!-- Hidden field to store the user_id -->
+        <input type="hidden" id="user_id" value="{{ user_id }}">
+
+        <div class="card-container">
+
+            <div class="employee-card">
+                <strong>Username</strong>
+                <input type="text" id="username" placeholder="Username" value="{{ user['username'] }}" readonly required>
+            </div>
+            <div class="employee-card">
+                <strong>Password</strong>
+                <input type="password" id="password" placeholder="Password" value="{{ user['password'] }}" required>
+            </div>
+            <div class="employee-card">
+                <strong>Age</strong>
+                <input type="number" id="age" placeholder="Age" value="{{ user['age'] }}" required>
+            </div>
+            <div class="employee-card">
+                <strong>Risk</strong>
+                <input type="text" id="risk" placeholder="Risk" value="{{ user['risk'] }}">
+            </div>
+            <div class="employee-card">
+                <strong>Expenditure</strong>
+                <input type="number" id="expenditure" placeholder="Expenditure" value="{{ user['expenditure'] }}">
+            </div>
+            <div class="employee-card">
+                <strong>Income</strong>
+                <input type="number" id="income" placeholder="Income" value="{{ user['income'] }}">
+            </div>
+            <div class="employee-card">
+                <strong>Profession</strong>
+                <input type="text" id="profession" placeholder="Profession" value="{{ user['profession'] }}">
+            </div>
+        </div>
+
+        <div class="button-container">
+    <button type="submit">Save Details</button>
+</form>
+    <button onclick="window.location.href = '/';">Back to HomePage</button>
+</div>
+
+
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>

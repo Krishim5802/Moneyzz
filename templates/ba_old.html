@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            line-height: 1.2;
+            filter: drop-shadow(0px 0px 10px rgba(0,0,0, 0.5));
+            font-weight: bold;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Card container */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            grid-gap: 20px;
+            max-width: 1200px;
+            margin: 100px auto; /* Adjust the margin as per your header height */
+            padding: 20px;
+            background-color: #e5ddd5;
+            border-radius: 8px;
+        }
+
+        .employee-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            max-width: 100%;
+        }
+
+        .employee-card strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .employee-card p {
+            margin: 5px 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px; /* Adjust as needed to center vertically */
+        }
+
+        button {
+            width: 200px;
+            padding: 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #3C8DAD;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #3C8DAD;
+            transform: scale(1.05);
+        }
+
+        h2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 2rem;
+            color: #002852;
+            margin: 20px auto;
+            margin-top: 40px;
+        }
+    </style>
+    <script>
+        // This function can be removed if you're no longer fetching data via JavaScript
+        function fetchIncomeAndAge() {
+            const user_id = document.getElementById('user_id').value;
+            const age = document.getElementById('age').value;
+            const income = document.getElementById('income').value;
+            const time_horizon = document.getElementById('time_horizon').value;
+            const loss_reaction = document.getElementById('loss_reaction').value;
+            const financial_situation = document.getElementById('financial_situation').value;
+            const experience = document.getElementById('experience').value;
+
+            fetch(`/ba/${user_id}`, {
+                method: 'POST', // Change to 'GET' since you're fetching data
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ age, income, time_horizon, loss_reaction, financial_situation, experience}),
+            })
+            .then(async response => {
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(errorText);
+                }
+                return response.json();
+            })
+            .then(data => {
+            if (data.success) {
+                alert('data got');
+            } else {
+                alert(data.error || 'Failed to get data');
+            }
+        })
+            .catch(error => {
+                alert('Error fetching data: ' + error.message);
+            });
+        }
+    </script>
+</head>
+
+<body>
+<header>
+    <div class="header-content">
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about">About</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/social">Social Media</a>
+        </nav>
+    </div>
+</header>
+
+<div class="contact-container" id="contactContainer">
+    <h1>Portfolio Page</h1>
+    <form onsubmit="event.preventDefault(); fetchIncomeAndAge();">
+        <h2>Enter your portfolio details: </h2>
+        <!-- Hidden field to store the user_id -->
+        <input type="hidden" id="user_id" value="{{ user_id }}">
+
+        <div class="card-container">
+            <div class="employee-card">
+                <strong>Income</strong>
+                <input type="number" id="income" placeholder="Income" value="{{ user['income'] }}">
+            </div>
+            <div class="employee-card">
+                <strong>Time Horizon (in years):</strong>
+                <input type="number" id="time_horizon" name="time_horizon" placeholder="Time Horizon" value="{{ user['time_horizon'] }} " required>
+            </div>
+            <div class="employee-card">
+                <strong>Loss Reaction (a, b, c):</strong>
+                <select name="Loss Reaction" id="loss_reaction" placeholder="Loss Reaction" value="{{ user['loss_reaction'] }} " required>
+                    <option value="a">A - Avoid Losses</option>
+                    <option value="b">B - Accept Small Losses</option>
+                    <option value="c">C - Can Tolerate Significant Losses</option>
+                </select>
+            </div>
+            <div class="employee-card">
+                <strong>Financial Situation (yes or no):</strong>
+                <select name="financial_situation" id="financial_situation" placeholder="financial_situation" value="{{ user['financial_situation'] }} " required>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="employee-card">
+                <strong>Experience Level (a, b, c):</strong>
+                <select name="experience" id="experience" placeholder="experience" value="{{ user['experience'] }} " required>
+                    <option value="a">A - Beginner</option>
+                    <option value="b">B - Intermediate</option>
+                    <option value="c">C - Experienced</option>
+                </select>
+            </div>
+            <div class="employee-card">
+                <strong>Age:</strong>
+                <input type="number" id="age" name="age" placeholder="Age" value="{{ user['age'] }}" readonly required>
+            </div>
+        </div>
+         <div class="button-container">
+            <button type="submit">Calculate Portfolio</button>
+        </div>
+</form>
+{% if portfolio_return_percentage %}
+    <h2>Your Portfolio Return Percentage: {{ portfolio_return_percentage }}%</h2>
+    <h2>VIX Volatility: {{ vix_volatility }}</h2>
+    <h2>Expected Returns by Asset Class:</h2>
+    <img src="data:image/png;base64,{{ plot_url }}" alt="Expected Returns Chart">
+    {% endif %}
+    
+    <button onclick="window.location.href = '/';">Back to HomePage</button>
+</div>
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>
+

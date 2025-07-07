@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyZZ - Money Made Easy</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .buttons .button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .button.signup {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .hero {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #111;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Feature slider styles */
+        .feature-slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            background-color: #f9f9f9;
+        }
+
+        .feature-slider {
+            display: flex;
+            gap: 20px;
+            scroll-behavior: smooth;
+            overflow-x: auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            flex: 0 0 300px;
+            padding: 32px;
+            border-radius: 16px;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            scroll-snap-align: center;
+        }
+
+        .feature-card:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Slider Navigation Buttons */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: #333;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .slider-nav.left {
+            left: 10px;
+        }
+
+        .slider-nav.right {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="MoneyZZ Logo">
+            <h1>MoneyZZ</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/social">Social Media</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="buttons">
+            <button class="button login">Log In</button>
+            <button class="button signup">Sign Up</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Make Money Easy</h1>
+            <p>Set up your financial goals and link them with your investments on MoneyZZ.</p>
+        </section>
+
+        <!-- Feature Slider Section -->
+        <section class="feature-slider-container">
+            <div class="slider-nav left" onclick="slide(-1)">&#10094;</div>
+            <div class="feature-slider">
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h2>Stocks and Mutual Funds Prediction</h2>
+                    <p>Invest smart: Predict your profits in stocks and mutual funds with precision!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h2>Goal Tracking</h2>
+                    <p>Stay on target: Track your goals and watch your dreams become reality!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h2>Asset Allocation</h2>
+                    <p>Balance your future: Master asset allocation for maximum growth!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h2>Data Security</h2>
+                    <p>Your data is safe: We prioritize your privacy and protection!</p>
+                </div>
+            </div>
+            <div class="slider-nav right" onclick="slide(1)">&#10095;</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MoneyZZ. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for slider navigation -->
+    <script>
+        const slider = document.querySelector('.feature-slider');
+        const cardWidth = 320; // Adjust according to card width and gap
+
+        function slide(direction) {
+            slider.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

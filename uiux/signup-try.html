@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MoneyZZ</title>
+    <style>
+
+ .animated-text {
+            background: 50% 100% / 50% 50% no-repeat radial-gradient(ellipse at bottom, #002852, #6e6e6e, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 5vw; /* Smaller font size */
+            font-family: "Source Sans Pro", sans-serif;
+            animation: reveal 3000ms ease-in-out forwards 200ms, glow 2500ms linear infinite 2000ms;
+            margin-top: 80px;
+            text-align: center; /* Center the text */
+        }
+
+        @keyframes reveal {
+            80% {
+                letter-spacing: 10px; /* Adjusted letter spacing */
+            }
+            100% {
+                background-size: 300% 300%;
+            }
+        }
+
+        @keyframes glow {
+            40% {
+                text-shadow: 0 0 8px #B0C4DE, 0 0 15px #b0b0b0; /* Grey luminescence */
+            }
+        }
+
+
+
+
+
+body {
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+           background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+                        
+                        animation: fadeIn 1s ease-in-out;
+
+
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2.5rem; /* Larger header text */
+            line-height: 1.2;
+            filter: drop-shadow(0px 0px 10px rgba(0,0,0, 0.5));
+                font-weight: bold;
+        }
+
+        .nav-bar {
+            margin-top: 10px;
+                        
+                        animation: fadeIn 1s ease-in-out;
+
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-bar a:hover {
+            background-color: #3C8DAD;
+            color: #fff;
+        }
+footer {
+             background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+                        
+                        animation: fadeIn 1s ease-in-out;
+
+        }
+
+  .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+background-color: #e5ddd5;
+            text-align: center;
+            margin: 20px auto 0; /* Centering and spacing */
+            max-width: 400px; /* Smaller width */
+            animation: fadeIn 1s ease-in-out;
+            
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 500px; /* Adjust width to fit padding */
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+    width: 300px; /* Adjust width to fit padding */
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+       button {
+    width: 300px; /* Adjust width to fit padding */
+    padding: 12px;
+    background-color: #002852;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6); /* Adjust shadow for a cleaner look */
+}
+
+button:hover {
+    background-color: #3C8DAD;
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);/* Adjust shadow for a cleaner look */
+}
+
+
+
+        form {
+            margin: 0 auto;
+            width: 300px;
+        }
+        input, button {
+            width: 300px;
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+ <header>
+        <div class="header-content">
+            <h1>MoneyZZ, money made easy</h1>
+            <nav class="nav-bar">
+                <a href="/about">About</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/social">Social Media</a>
+            </nav>
+        </div>
+    </header>
+
+<div class="animated-title">
+        <div class="text-top">
+            <div>
+                <span>MoneyZZ</span>
+            </div>
+        </div>
+        <div class="text-bottom">
+            <div>money made easy !!</div>
+        </div>
+    </div>
+
+
+<div class="animated-text">Sign Up !</div>
+
+    
+    <div class="login-container" id="loginContainer">
+    <form id="signupForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="number" id="age" placeholder="Age" required>
+        
+        <button type="submit">Sign Up</button>
+
+    </form>
+    <button onclick="window.location.href = '/';">Go to Login Page</button>
+</div>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const age = document.getElementById('age').value;
+            
+
+            fetch('http://localhost:5000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, age })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    document.getElementById('signupForm').reset();
+                } else {
+                    alert(data.error);
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error.message);
+            });
+        });
+    </script>
+
+
+    <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>

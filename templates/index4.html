@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+@keyframes showTopText {
+  0% { transform: translate3d(0, 100%, 0); }
+  40%, 60% { transform: translate3d(0, 50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes showBottomText {
+  0% { transform: translate3d(0, -100%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.animated-title {
+  color: #002852;
+  font-family: Roboto, Arial, sans-serif;
+  height: 90vmin;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vmin;
+}
+.animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+.animated-title > div div {
+  font-size: 12vmin;
+  padding: 2vmin 0;
+  position: absolute;
+}
+.animated-title > div div span {
+  display: block;
+}
+.animated-title > div.text-top {
+  border-bottom: 1vmin solid #000;
+  top: 0;
+}
+.animated-title > div.text-top div {
+  animation: showTopText 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+.animated-title > div.text-top div span:first-child {
+  color: #B0C4DE;
+}
+.animated-title > div.text-bottom {
+  bottom: 0;
+}
+.animated-title > div.text-bottom div {
+    
+    color: #002852;
+  animation: showBottomText 0.5s;
+  font-size: 6vmin;
+  animation-delay: 1.75s;
+  animation-fill-mode: forwards;
+  top: 0;
+  transform: translate(0, -100%);
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column; /* Allow footer to be positioned at the bottom */
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      overflow: hidden; /* Prevent scrolling */
+    }
+    header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      
+      height: ;
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: none;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+
+/* Slide transition animations */
+        .slide-out-left {
+            animation: slideOutLeft 0.6s forwards;
+        }
+        .slide-in-right {
+            animation: slideInRight 0.6s forwards;
+        }
+
+        @keyframes slideOutLeft {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+    .container {
+      display: none;
+      width: 100%; /* Make container full width */
+      max-width: 1100px; /* Max width for large screens */
+      height: 540px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative; /* Ensure container is positioned normally */
+      z-index: 2; /* Keep the container above the header */
+      margin-top: 30px; /* Space below header for container */
+    }
+    .login-section {
+      flex: 1;
+      background-color: #FFFFFF; /* White background for the login section */
+      padding: 2rem;
+    }
+    .promo-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .promo-section img {
+      width: 540px; /* Set image width */
+      height: 540px;
+      object-fit: cover;
+    }
+    .promo-section h2 {
+      font-size: 24px;
+      margin-bottom: 1rem;
+      color: #180D39; /* Dark blue for promo heading */
+    }
+    .promo-section p {
+      font-size: 16px;
+      text-align: center;
+      max-width: 250px;
+      color: #666666; /* Dark gray for promo text */
+    }
+    .login-section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 24px;
+      color: #180D39; /* Dark blue for login heading */
+    }
+    .login-section label {
+      font-size: 14px;
+      color: #888888; /* Gray for labels */
+    }
+    .login-section input[type="text"],
+    .login-section input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #2A8E9E; /* Teal border */
+      border-radius: 4px;
+      background-color: #F1F1F1; /* Light gray for input background */
+      color: #333333; /* Dark text color */
+      font-size: 14px;
+    }
+    .login-section button {
+    width: 300px; /* Adjust width to fit padding */
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #2A8E9E; /* Teal button */
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6); /* Adjust shadow for a cleaner look */
+}
+
+    .login-section button:hover {
+      background-color: #1B6B7D; /* Darker teal for hover effect */
+    transform: scale(1.05); 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);/* Adjust shadow for a cleaner look */
+    }
+    .login-section .social-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: absolute; /* Position footer at the bottom */
+      bottom: 0;
+      left: 0;
+      display: none;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+    /* Main content (shown after successful login) */
+
+
+.hero-container {
+    background-color: white; /* White background */
+    padding: 60px 20px;
+    border-radius: 10px; /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 80%; /* Adjust width to fit your design */
+    max-width: 800px; /* Max width to prevent it from being too wide */
+    text-align: center; /* Center the text inside the container */
+    align-items: center;
+    margin-left: 120px;
+    margin-top: 50px;
+}
+
+.hero-container h1 {
+    font-size: 48px;
+  color: #111;
+    font-weight: 600;
+    margin-bottom: 1rem; /* Spacing between heading and paragraph */
+}
+
+.hero-container p {
+  font-size: 20px;
+  color: #666;
+    font-size: 1.2rem; /* Size for the paragraph */
+    color: #666666; /* Lighter color for the text */
+    line-height: 1.5;
+}
+
+/* Feature Slider */
+.main-content {
+    display: none; /* Initially hidden */
+    padding: 20px;
+    margin-top: 100px;
+    width: 100%;
+    height: auto;
+    max-width: 1100px;
+  }
+
+  /* Feature Slider */
+/* Feature Slider */
+.feature-slider-container {
+    padding: 20px 10px;
+    background-color: #F0F8FF;
+    margin-bottom: 50px;
+    height: auto; /* Set height to auto to allow flexible height */
+    position: relative;
+    overflow: visible; /* Change overflow to visible */
+}
+
+
+  .feature-slider {
+    display: flex;
+    gap: 50px;  /* Increase the gap between cards (adjust the value as needed) */
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    padding: 60px 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for Webkit-based browsers (Chrome, Safari, Edge) */
+.feature-slider::-webkit-scrollbar {
+    display: none;
+}
+
+  .feature-card {
+    flex: 0 0 250px;
+    padding: 20px; /* Adjust padding if needed */
+    border-radius: 12px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    height: auto; /* Allow the card height to adjust based on content */
+    scroll-snap-align: center;
+}
+
+/* Add hover effect for pop-up */
+.feature-card:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: translateY(-30px) scale(1.20);  /* Moves the card up and slightly increases its size */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);  /* Adds a shadow for depth */
+}
+
+/*non clickable cards*/
+.feature-card.non-clickable {
+    pointer-events: none;
+}
+
+
+.feature-icon {
+    font-size: 36px;
+    color: #4CAF50;
+    margin-bottom: 12px;
+}
+
+  .feature-card h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+
+  /* Slider Navigation Buttons */
+  .slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #333;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+  }
+
+  .slider-nav.left {
+    left: 10px;
+  }
+
+  .slider-nav.right {
+    right: 10px;
+  }
+  </style>
+</head>
+<body class="slide-in-right">
+  <header>
+    <div class="header-content">
+      <img style="width: 200px; padding: 0; margin-left: -40px;" src="{{ url_for('static', filename='logo_pic.jpg') }}" alt="MoneyZZ Logo" >
+
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+        </nav>
+    </div>
+</header>
+  
+
+
+<div class="animated-title">
+        <div class="text-top">
+            <div>
+                <span>MoneyZZ</span>
+            </div>
+        </div>
+        <div class="text-bottom">
+            <div>money made easy !!</div>
+        </div>
+    </div>
+
+
+  <!-- Add the ID to the login container -->
+  <div class="container" id="loginContainer">
+    <div class="login-section">
+      <h2>Login</h2>
+      <form action="/login" method="POST" id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button style="width: 100%; margin-bottom: 10px;" type="submit">Login</button>
+      </form>
+      
+      <button class="card-button" style="margin-top: 15px; width: 100%;" onclick="window.location.href = '/signup';">Go to Signup Page</button>
+      <div id="message" style="color: green;"></div>
+      <div id="errorMessage" style="color: red; display: none;"></div>
+    </div>
+    <div class="promo-section">
+      <img src="{{ url_for('static', filename='login_pic.jpg') }}" alt="Promo Image">
+
+    </div>
+  </div>
+
+  <!-- Main Content (Shown After Login) -->
+  <div class="main-content" id="mainContent"> 
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Make Money Easy</h1>
+            <p>Set up your financial goals and link them with your investments on MoneyZZ.</p>
+        </div>
+    </section>
+
+    <section class="feature-slider-container">
+        <div class="slider-nav left" onclick="slide(-1)">&#10094;</div> <!-- Left arrow -->
+      <div class="feature-slider">
+        <div class="feature-card non-clickable" id="stocksPrediction">
+    <div class="feature-icon">📈</div>
+    <h2>Stocks Prediction</h2>
+    <p>Invest smart: Predict your profits in stocks and mutual funds with precision!</p>
+</div>
+<div class="feature-card" id="goalTracking">
+    <div class="feature-icon">🎯</div>
+    <h2>Goal Tracking</h2>
+    <p>Stay on target: Track your goals and watch your dreams become reality!</p>
+</div>
+<div class="feature-card" id="assetAllocation">
+    <div class="feature-icon">💼</div>
+    <h2>Asset Allocation</h2>
+    <p>Balance your future: Master asset allocation for maximum growth!</p>
+</div>
+<div class="feature-card" id="profile">
+    <div class="feature-icon">🔒</div>
+    <h2>Profile</h2>
+    <p>Your data is safe: We prioritize your privacy and protection!</p>
+</div>
+<div class="feature-card non-clickable" id="mutualFundsPrediction">
+    <div class="feature-icon">📈</div>
+    <h2>Mutual Funds Prediction</h2>
+    <p>Invest smart: Predict your profits in mutual funds with precision!</p>
+</div>
+<div class="feature-card" id="aiAssistant">
+    <div class="feature-icon">🤖</div>
+    <h2>AI Assistant</h2>
+    <p>Get help from our AI Assistant</p>
+</div>
+
+      </div>
+      <div class="slider-nav right" onclick="slide(1)">&#10095;</div> <!-- Right arrow -->
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Login and Main Content Display -->
+  <script>
+    document.querySelectorAll('a').forEach(link => {
+        link.onclick = function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            document.body.classList.add('slide-out-left');
+            setTimeout(() => window.location.href = href, 1000);
+        };
+    });
+
+    window.onload = function() {
+        document.body.classList.add('slide-in-right');
+    };
+    document.getElementById('loginForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
+      });
+      
+      const result = await response.json();
+      
+      if (response.status === 200) {
+          document.getElementById('message').textContent = 'Login was successful!';
+          document.getElementById('loginContainer').style.display = 'none';  // Hide login container
+          document.getElementById('mainContent').style.display = 'block';     // Show main content
+          document.getElementById('errorMessage').style.display = 'none';
+      } else {
+          document.getElementById('errorMessage').textContent = result.message;
+          document.getElementById('errorMessage').style.display = 'block';
+      }
+
+      const stocksPrediction = document.getElementById('stocksPrediction');
+      stocksPrediction.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/stock`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+        const profile = document.getElementById('profile');
+      profile.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/profile/${result.user_id}`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+        const goalTracking = document.getElementById('goalTracking');
+      goalTracking.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/goal/${result.user_id}`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+        const assetAllocation = document.getElementById('assetAllocation');
+      assetAllocation.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/ba`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+        const mutualFundsPrediction = document.getElementById('mutualFundsPrediction');
+      mutualFundsPrediction.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/mf`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+        const aiAssistant = document.getElementById('aiAssistant');
+      aiAssistant.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/chat`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+     const slider = document.querySelector('.feature-slider');
+        const cardWidth = 320; // Adjust according to card width and gap
+
+function slide(direction) {
+            slider.scrollBy({
+                left: direction * cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    setTimeout(function() {
+    document.querySelector('.animated-title').style.display = 'none'; 
+
+    document.querySelector('.container').style.display = 'flex'; // Show login container
+    document.querySelector('footer').style.display = 'block'; // Show footer
+    document.querySelector('.header-content').style.display = 'flex'; // Show header content
+    document.querySelector('.nav-bar').style.display = 'block'; // Show navigation bar
+    }, 3000);
+//
+  </script>
+
+</body>
+</html>
+
+

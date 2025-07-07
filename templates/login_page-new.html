@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      font-family: 'Roboto', 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column; /* Allow footer to be positioned at the bottom */
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      overflow: hidden; /* Prevent scrolling */
+    }
+    header {
+      position: absolute; /* Position the header absolutely */
+      top: 0;
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      padding: 20px; /* Space around content */
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+      margin: 0 15px; /* Space between links */
+      text-decoration: none; /* Remove underline */
+      color: #2A8E9E; /* Link color */
+      font-weight: 500;
+    }
+    .container {
+      display: flex;
+      width: 100%; /* Make container full width */
+      max-width: 1100px; /* Max width for large screens */
+      height: 540px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative; /* Ensure container is positioned normally */
+      z-index: 2; /* Keep the container above the header */
+      margin-top: 30px; /* Space below header for container */
+    }
+    .login-section {
+      flex: 1;
+      background-color: #FFFFFF; /* White background for the login section */
+      padding: 2rem;
+    }
+    .promo-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .promo-section img {
+      width: 540px; /* Set image width */
+      height: 540px;
+      object-fit: cover;
+    }
+    .promo-section h2 {
+      font-size: 24px;
+      margin-bottom: 1rem;
+      color: #180D39; /* Dark blue for promo heading */
+    }
+    .promo-section p {
+      font-size: 16px;
+      text-align: center;
+      max-width: 250px;
+      color: #666666; /* Dark gray for promo text */
+    }
+    .login-section h2 {
+      margin-bottom: 1.5rem;
+      font-size: 24px;
+      color: #180D39; /* Dark blue for login heading */
+    }
+    .login-section label {
+      font-size: 14px;
+      color: #888888; /* Gray for labels */
+    }
+    .login-section input[type="text"],
+    .login-section input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #2A8E9E; /* Teal border */
+      border-radius: 4px;
+      background-color: #F1F1F1; /* Light gray for input background */
+      color: #333333; /* Dark text color */
+      font-size: 14px;
+    }
+    .login-section button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background-color: #2A8E9E; /* Teal button */
+      color: #FFFFFF;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .login-section button:hover {
+      background-color: #1B6B7D; /* Darker teal for hover effect */
+    }
+    .login-section .social-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+    .social-buttons button {
+      flex: 1;
+      padding: 10px;
+      background: #E1E1E1; /* Light gray for social buttons */
+      border: 1px solid #CCCCCC;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+      color: #4A90E2; /* Blue for social buttons text */
+    }
+    .social-buttons button:last-child {
+      margin-right: 0;
+    }
+    .social-buttons button:hover {
+      background-color: #CCCCCC;
+      color: #FF8C00; /* Orange for hover */
+    }
+    footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: absolute; /* Position footer at the bottom */
+      bottom: 0;
+      left: 0;
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+    /* Main content (shown after successful login) */
+    .main-content {
+      display: none; /* Initially hidden */
+      padding: 20px;
+    }
+
+    .hero h1, .hero p, .feature-slider-container {
+      text-align: center;
+    }
+
+    .feature-slider-container {
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+    }
+    .feature-card {
+      width: 300px;
+      padding: 32px;
+      border-radius: 16px;
+      margin: 10px;
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+  </style>
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>MoneyZZ, money made easy</h1>
+      <nav class="nav-bar">
+        <a href="/about">About</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/social">Social Media</a>
+      </nav>
+    </div>
+  </header>
+  
+
+
+
+  <div class="container">
+    <div class="login-section">
+      <h2>Login</h2>
+      <form action="/login" method="POST" id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+            
+        <button type="submit">Login</button>
+      </form>
+      <div class="social-buttons">
+        <button>Google</button>
+        <button>Facebook</button>
+      </div>
+      <button class="card-button" style="margin-top: 15px; width: 100%;" onclick="window.location.href = '/signup';">Go to Signup Page</button>
+      <div id="message" style="color: green;"></div>
+      <div id="errorMessage" style="color: red; display: none;"></div>
+    </div>
+    <div class="promo-section">
+      <img src="/Users/krishimehta/Desktop/project/templates/login_pic.jpg" alt="Promo Image">
+    </div>
+  </div>
+  <!-- Main Content (Shown After Login) -->
+  <div class="main-content" id="mainContent">
+    <header>
+      <h1>MoneyZZ</h1>
+      <nav>
+        <a href="/social">Social Media</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact Us</a>
+      </nav>
+    </header>
+    <section class="hero">
+      <h1>Make Money Easy</h1>
+      <p>Set up your financial goals and link them with your investments on MoneyZZ.</p>
+    </section>
+    <section class="feature-slider-container">
+      <div class="feature-slider">
+        <div class="feature-card">
+          <h2>Stocks and Mutual Funds Prediction</h2>
+          <p>Invest smart: Predict your profits in stocks and mutual funds with precision!</p>
+        </div>
+        <div class="feature-card">
+          <h2>Goal Tracking</h2>
+          <p>Stay on target: Track your goals and watch your dreams become reality!</p>
+        </div>
+        <div class="feature-card">
+          <h2>Asset Allocation</h2>
+          <p>Balance your future: Master asset allocation for maximum growth!</p>
+        </div>
+        <div class="feature-card">
+          <h2>Data Security</h2>
+          <p>Your data is safe: We prioritize your privacy and protection!</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Login and Main Content Display -->
+  <script>
+    document.getElementById('loginForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const response = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
+      });
+      
+      const result = await response.json();
+      
+      if (response.status === 200) {
+          document.getElementById('message').textContent = 'Login was successful!';
+          document.getElementById('loginContainer').style.display = 'none';
+          document.getElementById('mainContent').style.display = 'block';
+          document.getElementById('errorMessage').style.display = 'none';
+      } else {
+          document.getElementById('errorMessage').textContent = result.message;
+          document.getElementById('errorMessage').style.display = 'block';
+      }
+    };
+  </script>
+
+</body>
+</html>
+
+
+
+########################################################OG
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+     <div id="message"></div>
+    <style>
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+@keyframes showTopText {
+  0% { transform: translate3d(0, 100%, 0); }
+  40%, 60% { transform: translate3d(0, 50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes showBottomText {
+  0% { transform: translate3d(0, -100%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.animated-title {
+  color: #002852;
+  font-family: Roboto, Arial, sans-serif;
+  height: 90vmin;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vmin;
+}
+.animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+.animated-title > div div {
+  font-size: 12vmin;
+  padding: 2vmin 0;
+  position: absolute;
+}
+.animated-title > div div span {
+  display: block;
+}
+.animated-title > div.text-top {
+  border-bottom: 1vmin solid #000;
+  top: 0;
+}
+.animated-title > div.text-top div {
+  animation: showTopText 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+.animated-title > div.text-top div span:first-child {
+  color: #B0C4DE;
+}
+.animated-title > div.text-bottom {
+  bottom: 0;
+}
+.animated-title > div.text-bottom div {
+    
+    color: #002852;
+  animation: showBottomText 0.5s;
+  font-size: 6vmin;
+  animation-delay: 1.75s;
+  animation-fill-mode: forwards;
+  top: 0;
+  transform: translate(0, -100%);
+}
+
+body {
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        header {
+           background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+                        display: none;
+                        animation: fadeIn 1s ease-in-out;
+
+
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2.5rem; /* Larger header text */
+            line-height: 1.2;
+            filter: drop-shadow(0px 0px 10px rgba(0,0,0, 0.5));
+                font-weight: bold;
+        }
+
+        .nav-bar {
+            margin-top: 10px;
+                        display: none;
+                        animation: fadeIn 1s ease-in-out;
+
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-bar a:hover {
+            background-color: #3C8DAD;
+            color: #fff;
+        }
+
+        /* Footer */
+        
+
+        /* Login container */
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+background-color: #e5ddd5;
+            text-align: center;
+            margin: 100px auto 0; /* Centering and spacing */
+            max-width: 400px; /* Smaller width */
+            animation: fadeIn 1s ease-in-out;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 24px); /* Adjust width to fit padding */
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+       button {
+    width: calc(100% - 24px); /* Adjust width to fit padding */
+    padding: 12px;
+    background-color: #002852;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow for a cleaner look */
+}
+
+button:hover {
+    background-color: #3C8DAD;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adjust shadow for a cleaner look */
+}
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* Card buttons */
+        /* Container for buttons */
+.button-container {
+    margin-top: 20px;
+    text-align: center; /* Center align buttons */
+       
+}
+
+/* Updated card-button styles */
+.card-button {
+    display: inline-block;
+    width: 180px;
+    padding: 12px;
+    margin: 10px;
+    background-color: #0077B6; /* Updated color */
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease-in-out;
+    font-size: 1.1rem; /* Adjusted font size */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);/* Adjust shadow for a cleaner look */
+}
+
+.card-button:hover {
+    background-color: #005f73;
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 1), 0px 1px 3px rgba(0, 0, 0, 1); /* Adjust shadow for a cleaner look */
+}
+
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .login-container {
+                width: 90%;
+            }
+
+            button, input {
+                font-size: 14px;
+            }
+        }
+
+ footer {
+             background: linear-gradient(90deg, #002852, #3A6E8F 50%, #002852);
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+                        display: none;
+                        animation: fadeIn 1s ease-in-out;
+
+        }
+
+
+ 
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about">About</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/social">Social Media</a>
+        </nav>
+    </div>
+</header>
+
+
+<div class="animated-title">
+        <div class="text-top">
+            <div>
+                <span>MoneyZZ</span>
+            </div>
+        </div>
+        <div class="text-bottom">
+            <div>money made easy !!</div>
+        </div>
+    </div>
+
+
+<br>
+<br>
+<div class="login-container" id="loginContainer">
+    <h2>Login</h2>
+    <form action="/login" method="POST" id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+            
+        <button type="submit">Login</button>
+    </form>
+    <div class="error-message" id="errorMessage"></div>
+</div>
+
+<div class="button-container">
+    <a class="card-button" href="/signup">Go to Signup Page</a>
+    <button class="card-button" id="homeButton" style="display: none;" onclick="window.location.href = '/home';">Go to home Page</button>
+    <button class="card-button" id="profileButton" style="display: none;" onclick="window.location.href = '/profile';">Go to Profile Page</button>
+    
+    <button class="card-button" id="stockButton" style="display: none;" onclick="window.location.href = '/stock';">StockBot</button>
+    <button class="card-button" id="baButton" style="display: none;" onclick="window.location.href = '/ba';">BA</button>
+    <button class="card-button" id="mfButton" style="display: none;" onclick="window.location.href = '/mf';">Mutual Fund Bot</button>
+
+<button class="card-button" id="chatButton" style="display: none;" onclick="window.location.href = '/chat';">AI-Finbot</button>
+
+<button class="card-button" id="goalButton" style="display: none;" onclick="window.location.href = '/goal';">goal</button>
+
+</div>
+
+
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+
+
+    <script>
+        document.getElementById('loginForm').onsubmit = async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`,
+            });
+
+            const result = await response.json();
+           if (response.status === 200) {
+                // Display success message
+                document.getElementById('message').textContent = 'Login was successful!';
+                document.querySelector('.animated-title').style.display = 'none';
+                // Set button URL with user ID
+                const profileButton = document.getElementById('profileButton');
+                profileButton.style.display = 'inline'; // Show the button
+                profileButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/profile/${result.user_id}`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                    const chatButton = document.getElementById('chatButton');
+                chatButton.style.display = 'inline'; // Show the button
+                chatButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/chat`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                const stockButton = document.getElementById('stockButton');
+                stockButton.style.display = 'inline'; // Show the button
+                stockButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/stock`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                const baButton = document.getElementById('baButton');
+                baButton.style.display = 'inline'; // Show the button
+                baButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/ba`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+
+
+                const mfButton = document.getElementById('mfButton');
+                mfButton.style.display = 'inline'; // Show the button
+                mfButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/mf`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                 const goalButton = document.getElementById('goalButton');
+                goalButton.style.display = 'inline'; // Show the button
+                goalButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/goal/${result.user_id}`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+
+
+
+
+                const homeButton = document.getElementById('homeButton');
+                homeButton.style.display = 'inline'; // Show the button
+                homeButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/home`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+document.getElementById('errorMessage').style.display = 'none';
+            } else {
+                // Display error message if login fails
+                document.getElementById('errorMessage').textContent = result.message;
+                document.getElementById('errorMessage').style.display = 'block';
+                document.getElementById('homeButton').style.display = 'none';
+                document.getElementById('baButton').style.display = 'none';
+                document.getElementById('stockButton').style.display = 'none';
+                document.getElementById('chatButton').style.display = 'none';
+                document.getElementById('profileButton').style.display = 'none';
+                document.getElementById('mfButton').style.display = 'none';
+                document.getElementById('oneui').style.display = 'none';
+            }
+        };
+
+
+setTimeout(function() {
+    document.querySelector('.animated-title').style.display = 'none'; // Hide animated title
+    document.querySelector('.login-container').style.display = 'block'; // Show login container
+    document.querySelector('footer').style.display = 'block'; // Show footer
+    document.querySelector('.header-content').style.display = 'block'; // Show header content
+    document.querySelector('.nav-bar').style.display = 'block'; // Show navigation bar
+}, 3000);
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

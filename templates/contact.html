@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto:700');
+       
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+            background-color: #F0F8FF; /* Light background */
+            color: #333333;
+        }
+
+        header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      
+      height: ;
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+
+        /* Contact Us Form */
+        .contact-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+   
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    margin: 120px auto 0;
+    width: 83%;
+    background-color: #ffffff;
+}
+
+/* Make employee details flexible */
+.employee-details {
+    flex: 1;
+    overflow: auto; /* Allow scrolling if content overflows */
+}
+
+.contact-form {
+    flex: 1;
+    margin-right: 20px;
+}
+
+        h2 {
+            font-size: 2rem;
+            color: #002852;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], input[type="email"], textarea {
+            width: calc(100% - 24px);
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #F7F7F7;
+            box-sizing: border-box;
+            font-size: 1rem;
+            border: 1px solid #2A8E9E;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+        }
+
+        textarea {
+            height: 120px;
+        }
+
+        button {
+            width: calc(100% - 24px);
+            padding: 12px;
+            background-color: #002852;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        button:hover {
+            background-color: #3C8DAD;
+            transform: scale(1.05);
+        }
+
+        /* Employee Details */
+        .employee-card {
+            background-color: #AAB7B7;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            color: 2E4156;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .employee-card strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .employee-card p {
+            margin: 5px 0;
+        }
+
+        .employee-card .contact-info {
+            color: #0077B6;
+            font-size: 1rem;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+
+        .employee-card .contact-info:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: fixed; /* Position footer at the bottom */
+      bottom: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+        /* Responsive */
+    
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-bar a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .contact-container {
+                width: 90%;
+                flex-direction: column;
+            }
+
+            .contact-form, .employee-details {
+                margin: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img style="width: 200px; padding: 0; margin-left: -40px;" src="{{ url_for('static', filename='logo_pic.jpg') }}" alt="MoneyZZ Logo" >
+
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+        </nav>
+    </div>
+</header>
+<div class="contact-container" id="contactContainer">
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        
+        <form action="https://mail.google.com/mail/?view=cm&fs=1&to=moneyzz@gmail.com&su=Contact%20Us%20Form&body=Name:%20%0AEmail:%20%0AMessage:%20" method="get" target="_blank">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br><br><br>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <br><br><br>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <div class="employee-details">
+        <h2>Our Team</h2>
+
+        <div class="employee-card">
+            <strong>MoneyZZ</strong>
+            you can contact us here
+            <a href="mailto:moneyZZ@gmail.com" class="contact-info">Email: moneyZZ@gmail.com</a>
+        </div>
+        <div class="employee-card">
+            <strong>Ishan Desai - CEO</strong>
+            <a href="tel:+917874854604" class="contact-info">Phone: +91 7874854604</a>
+            <a href="mailto:ishan.desai00@nmims.in" class="contact-info">Email: ishan.desai00@nmims.in</a>
+            
+            
+        </div>
+        <div class="employee-card">
+            <strong>Krishi Mehta - COO</strong>
+            <a href="tel:+919769109394" class="contact-info">Phone: +91 9769109394</a>
+            <a href="mailto:krishi.mehta50@nmims.in" class="contact-info">Email: krishi.mehta50@nmims.in</a>
+     
+        </div>
+        <div class="employee-card">
+            <strong>Dhaivat Mehta - CTO</strong>
+            <a href="tel:+919869843059" class="contact-info">Phone: +91 9869843059</a>
+            <a href="mailto:dhaivat.mehta26@nmims.in" class="contact-info">Email: dhaivat.mehta98@gmail.com</a>
+          
+        </div>
+    </div>
+</div>
+
+ <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>

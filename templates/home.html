@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+  <style type="text/css">
+   
+body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #002852;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2.5rem; /* Larger header text */
+            line-height: 1.2;
+        }
+
+        .nav-bar {
+            margin-top: 10px;
+        }
+
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            background-color: #3C8DAD;
+            color: #fff;
+        }
+
+        /* Footer */
+        
+
+        /* Login container */
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 100px auto 0; /* Centering and spacing */
+            max-width: 400px; /* Smaller width */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+       
+
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 24px); /* Adjust width to fit padding */
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: calc(100% - 24px); /* Adjust width to fit padding */
+            padding: 12px;
+            background-color: #002852;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3C8DAD;
+            transform: scale(1.05);
+        }
+}
+
+h2 {
+    color: #0077B6;
+}
+
+button-container {
+    margin-top: 20px;
+    text-align: center; /* Center align buttons */
+}
+
+/* Updated card-button styles */
+.card-button {
+    display: inline-block;
+    width: 180px;
+    padding: 12px;
+    margin: 10px;
+    background-color: #0077B6; /* Updated color */
+    color: white;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease-in-out;
+    font-size: 1.1rem; /* Adjusted font size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Reduced shadow for a cleaner look */
+}
+
+.card-button:hover {
+    background-color: #005f73;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .login-container {
+                width: 90%;
+            }
+
+            button, input {
+                font-size: 14px;
+            }
+        }
+
+ footer {
+            background-color: #002852;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about">About</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/social">Social Media</a>
+        </nav>
+    </div>
+</header>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+    <!-- User Details Section -->
+        <h2 align="center" value="{{ user['username'] }}">Welcome, {{ user['username'] }}!</h2>
+        <br>
+<br>
+<br>
+    <div class="button-container">
+    <a class="card-button" href="/signup">Go to Signup Page</a>
+    
+    <button class="card-button" id="profileButton" style="display: none;" onclick="window.location.href = '/profile';">Go to Profile Page</button>
+    <button class="card-button" id="chatButton" style="display: none;" onclick="window.location.href = '/chat';">Gemini</button>
+    <button class="card-button" id="stockButton" style="display: none;" onclick="window.location.href = '/stock';">Stock</button>
+    <button class="card-button" id="baButton" style="display: none;" onclick="window.location.href = '/ba';">BA</button>
+</div>
+
+    <!-- Chat History Section -->
+    
+
+    <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+
+
+<script >
+    
+                    const profileButton = document.getElementById('profileButton');
+                profileButton.style.display = 'inline'; // Show the button
+                profileButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/profile/${result.user_id}`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                    const chatButton = document.getElementById('chatButton');
+                chatButton.style.display = 'inline'; // Show the button
+                chatButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/chat`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                const stockButton = document.getElementById('stockButton');
+                stockButton.style.display = 'inline'; // Show the button
+                stockButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/stock`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                const baButton = document.getElementById('baButton');
+                baButton.style.display = 'inline'; // Show the button
+                baButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/ba`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+                const homeButton = document.getElementById('homeButton');
+                homeButton.style.display = 'inline'; // Show the button
+                homeButton.onclick = function() {
+                    // Delay before redirecting
+                    setTimeout(() => {
+                        window.location.href = `/home`;
+                    }, 2000); // Delay in milliseconds (2000 ms = 2 seconds)
+                };
+
+</script>
+
+</body>
+</html>

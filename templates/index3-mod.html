@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MoneyZZ</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            height: 100vh;
+            background-color: #FFFFF0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #002366, #002366);
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 36px;
+            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #002366;
+        }
+
+        /* Animated Text */
+        .animated-text {
+            background: radial-gradient(ellipse at bottom, #002366, #002366, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 6vw;
+            font-family: 'Playfair Display', serif;
+            animation: reveal 3000ms ease-in-out forwards 200ms, glow 2500ms linear infinite 2000ms;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        @keyframes reveal {
+            80% {
+                letter-spacing: 10px;
+            }
+            100% {
+                background-size: 300% 300%;
+            }
+        }
+
+        @keyframes glow {
+            40% {
+                text-shadow: 0 0 8px #FFD700, 0 0 15px #800020;
+            }
+        }
+
+        /* Login Container */
+        .login-container {
+            background-color: #FFFFF0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            margin: 20px auto 0;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        input[type="text"], input[type="password"], input[type="number"] {
+            width: 300px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #C0C0C0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            font-size: 16px;
+            font-family: 'Lato', sans-serif;
+            color: #800020;
+        }
+
+        button {
+            width: 300px;
+            padding: 12px;
+            background-color: #002366;
+            color: #FFD700;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #FFD700;
+            color: #002366;
+            transform: scale(1.05);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        form {
+            margin: 0 auto;
+            width: 300px;
+ }
+
+        input, button {
+            width:  300px;
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: linear-gradient(90deg, #002366, #002366);
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #002366;
+            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about">About</a>
+            <a href="/contact">Contact Us</a>
+            <a href="/social">Social Media</a>
+        </nav>
+    </div>
+</header>
+
+<div class="animated-title">
+    <div class="text-top">
+        <div>
+            <span>MoneyZZ</span>
+        </div>
+    </div>
+    <div class="text-bottom">
+        <div>money made easy !!</div>
+    </div>
+</div>
+
+<div class="animated-text">Sign Up !</div>
+
+<div class="login-container" id="loginContainer">
+    <form id="signupForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="number" id="age" placeholder="Age" required>
+
+        <button type="submit">Sign Up</button>
+
+    </form>
+    <button onclick="window.location.href = '/';">Go to Login Page</button>
+</div>
+
+<script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const age = document.getElementById('age').value;
+
+        fetch('http://localhost:5000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password, age })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                document.getElementById('signupForm').reset();
+            } else {
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            alert('Error: ' + error.message);
+        });
+    });
+</script>
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      font-family: 'Roboto', 'Inter', sans-serif;
+      flex-direction: column;/* Allow footer to be positioned at the bottom */
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      overflow: hidden;
+      
+    }
+        header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      left: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      
+      height: ;
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+
+
+    /* Container to split the left and right halves */
+    .container {
+        display: flex;
+        max-width: 1100px;
+        margin: 110px auto;
+        padding: 20px;
+        background-color: #C0C8CA;
+        border-radius: 8px;
+        height: 540px;
+    }
+
+.vertical-line {
+      width: 2px;
+      background-color: #d68073;
+      position: absolute;
+      left: 500px;
+      top: 200px;
+      bottom: 0;
+      height: 400px;
+    }
+    /* Left side for the avatar section */
+    .avatar-section {
+        text-align: center;
+        flex: 0 0 50%; /* Takes up half of the container */
+        padding-right: 20px;
+        margin-left: 65px;
+    }
+
+    .avatar {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+        margin-top: 80px;
+        margin-left: -320px;
+    }
+
+    .change-avatar, .delete-avatar {
+        display: block;
+        width: 200px;
+        padding: 10px;
+        font-size: 14px;
+        margin-left: 30px;
+        cursor: pointer;
+        margin-top: 10px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .change-avatar {
+        background-color: #2A8E9E; /* Teal button */
+        color: #ffffff;
+    }
+
+    .change-avatar:hover {
+        background-color: #CCCCCC;
+        color: #FF8C00; /* Orange for hover */
+    }
+
+    .delete-avatar {
+        background-color: black;
+        color: white;
+    }
+
+    /* Right side for the input fields */
+    .right-container {
+        flex: 0 0 50%; /* Takes up the other half of the container */
+        padding-left: 20px;
+        margin-left: -150px;
+    }
+
+    .card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 columns */
+        grid-gap: 20px;
+        max-width: 100%;
+    }
+
+    .employee-card {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        margin-top: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+
+    .employee-card strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .employee-card input {
+        width: 80%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 200px;
+        padding: 12px;
+        border-radius: 20px;
+        cursor: pointer;
+        background-color: #3C8DAD;
+        color: white;
+        border: none;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+        margin-bottom: 20px;
+    }
+
+    button:hover {
+        background-color: #3C8DAD;
+        transform: scale(1.05);
+    }
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 2rem;
+        color: #002852;
+        margin-left: -250px;
+        
+        margin-top: 0px;
+    }
+ @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-bar a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+    footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: fixed; /* Position footer at the bottom */
+      bottom: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+</style>
+<script>
+    function updateProfile() {
+        const user_id = document.getElementById('user_id').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const age = document.getElementById('age').value;
+        const income = document.getElementById('income').value;
+        const expenditure = document.getElementById('expenditure').value;
+        const risk = document.getElementById('risk').value;
+        const profession = document.getElementById('profession').value;
+
+        fetch(`/profile/${user_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password, age, expenditure, risk, income, profession }),
+        })
+        .then(async response => {
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(errorText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Profile updated successfully!');
+            } else {
+                alert(data.error || 'Failed to update profile.');
+            }
+        })
+        .catch(error => {
+            alert('Error updating profile: ' + error.message);
+        });
+    }
+</script>
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img style="width: 200px; padding: 0; margin-left: -40px;" src="{{ url_for('static', filename='logo_pic.jpg') }}" alt="MoneyZZ Logo" >
+
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+        </nav>
+    </div>
+</header>
+
+<div class="contact-container" id="contactContainer">
+    <form onsubmit="event.preventDefault(); updateProfile();">
+        <!-- Hidden field to store the user_id -->
+        <input type="hidden" id="user_id" value="{{ user_id }}">
+
+        <div class="container">
+            <!-- Left half for avatar section -->
+            <div class="avatar-section">
+                <h2>Edit your details here: </h2>
+                <img src="avatar.jpg" alt="Avatar" class="avatar">
+                <button class="change-avatar">Change Avatar</button>
+                <button class="delete-avatar">Delete Avatar</button>
+            </div>
+            <div class="vertical-line"></div>
+            <!-- Right half for inputs -->
+            <div class="right-container">
+                <div class="card-container">
+                    <div class="employee-card">
+                        <strong>Username</strong>
+                        <input type="text" id="username" placeholder="Username" value="{{ user['username'] }}" readonly required>
+                    </div>
+                    <div class="employee-card">
+                        <strong>Password</strong>
+                        <input type="password" id="password" placeholder="Password" value="{{ user['password'] }}" required>
+                    </div>
+                    <div class="employee-card">
+                        <strong>Age</strong>
+                        <input type="number" id="age" placeholder="Age" value="{{ user['age'] }}" required>
+                    </div>
+                    <div class="employee-card">
+                        <strong>Risk</strong>
+                        <input type="text" id="risk" placeholder="Risk" value="{{ user['risk'] }}">
+                    </div>
+                    <div class="employee-card">
+                        <strong>Income</strong>
+                        <input type="number" id="income" placeholder="Income" value="{{ user['income'] }}" required>
+                    </div>
+                    <div class="employee-card">
+                        <strong>Expenditure</strong>
+                        <input type="number" id="expenditure" placeholder="Expenditure" value="{{ user['expenditure'] }}" required>
+                    </div>
+                    <div class="employee-card">
+                        <strong>Profession</strong>
+                        <input type="text" id="profession" placeholder="Profession" value="{{ user['profession'] }}" required>
+                    </div>
+                    
+                        <button style="margin-top: 10px; background-color: #E1E1E1; color: #4A90E2; hover: #FF8C00; margin-left: 30px; font-size: 17px;"  class="update-button" onclick="window.location.href='/'">Go to Home Page</button>
+                    
+                </div>
+
+                <!-- Save button -->
+                <div class="button-container">
+                    <button style="margin-left: -280px; margin-top: 10px;" type="submit" class="save">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Strategy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      font-family: 'Roboto', 'Inter', sans-serif;
+      flex-direction: column;/* Allow footer to be positioned at the bottom */
+      height: 100vh;
+      background-color: #F0F8FF; /* Light background matching the image */
+      color: #333333;
+      position: relative; /* Allow absolute positioning for header */
+      
+    }
+        header {
+      position: fixed; /* Position the header absolutely */
+      top: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+      width: 100%; /* Make header full width */
+      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+      
+      height: ;
+      z-index: 1; /* Ensure header is on top of the background */
+    }
+    .header-content {
+      max-width: 1100px; /* Centering the content */
+      margin: auto;
+      display: flex;
+      justify-content: space-between; /* Space between header items */
+      align-items: center; /* Center items vertically */
+    }
+    .nav-bar a {
+  margin: 0 15px; /* Space between links */
+  text-decoration: none; /* Remove underline */
+  color: #2A8E9E; /* Link color */
+  font-weight: 500;
+}
+
+/* Styling for button links */
+.nav-bar a.button-link {
+  padding: 8px 16px; /* Padding for button look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #2A8E9E; /* Button background color */
+  color: #fff; /* Button text color */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+.nav-bar a.button-link:hover {
+  background-color: #FF8C00; /* Hover color */
+}
+
+
+    .parent-container {
+    max-width: 1200px;
+    margin: 100px auto 0;
+    animation: fadeIn 1s ease-in-out;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 200px; /* Adjust the label width as needed */
+    margin-right: 10px;
+    color:#15384E ;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    color: #333333;
+    height: 7px;
+    border: 1px solid #2A8E9E;
+    background-color: #F7F7F7;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus {
+    border-color: #2A8E9E;
+    outline: none;
+}
+
+.form-section input[type="submit"] {
+    padding: 12px 24px;
+    background-color: #2A8E9E;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.form-section input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.employee-card {
+    background-color: #15384E;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.employee-card strong {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.employee-card p {
+    margin: 5px 0;
+}
+
+.employee-card .contact-info {
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.employee-card .contact-info:hover {
+    text-decoration: underline;
+}
+
+
+        .plot-container {
+    background-color: #2A8E9E; /* Teal color */
+}
+        .graph-section img, .plot-container img {
+            max-width: 100%;
+            height: auto;
+            color: white;
+            border-radius: 10px;
+            background-color: #15384E;
+           box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+
+        }
+
+      footer {
+      width: 100%; /* Full width footer */
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent footer */
+      padding: 10px 0; /* Padding for footer */
+      text-align: center; /* Center footer text */
+      position: fixed; /* Position footer at the bottom */
+      bottom: 0;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.6);
+      left: 0;
+    }
+    footer p {
+      margin: 0; /* No margin for footer text */
+      color: #333333; /* Dark text color */
+    }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+
+            .nav-bar a {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .form-section input[type="text"],
+            .form-section input[type="date"] {
+                width: calc(100% - 18px);
+                padding: 10px;
+            }
+
+            .form-section input[type="submit"] {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="header-content">
+        <img style="width: 200px; padding: 0; margin-left: -40px;" src="{{ url_for('static', filename='logo_pic.jpg') }}" alt="MoneyZZ Logo" >
+
+        <h1>MoneyZZ, money made easy</h1>
+        <nav class="nav-bar">
+            <a href="/about" class="button-link">About</a>
+            <a href="/contact" class="button-link">Contact Us</a>
+            <a href="/social" class="button-link">Social Media</a>
+        </nav>
+    </div>
+</header>
+<!-- Parent container for both sections -->
+<div class="parent-container">
+
+    <div class="container form-section">
+    <h1>Investment Strategy Form</h1>
+    <form method="POST">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="income">Income:</label>
+            <input type="number" name="income" required>
+        </div>
+        <div class="form-group">
+            <label for="expected_return">Expected Return:</label>
+            <select name="expected_return" required>
+                <option value="1">Low Risk</option>
+                <option value="2">Mid Risk</option>
+                <option value="3">High Risk</option>
+                <option value="4">Very High</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="investable_amount">Investable Amount:</label>
+            <input type="number" name="investable_amount" required>
+        </div>
+        <div class="form-group">
+            <label for="self_assessed_risk">Self-Assessed Risk (high, moderate, low):</label>
+            <input type="text" name="self_assessed_risk" required>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<div class="container form-section">
+    {% if results %}
+        <h2>Results</h2>
+        <div class="employee-card">
+        <h3>Allocation Strategy:</h3>
+        <ul>
+            <li>Equities: {{ results.allocation.Equities }}</li>
+            <li>Bonds: {{ results.allocation.Bonds }}</li>
+            <li>Cash: {{ results.allocation.Cash }}</li>
+        </ul>
+        <br>
+        <h3>Recommended Funds:</h3>
+        <ul>
+            {% for category, funds in results.funds.items() %}
+                <li>{{ category }}: {{ funds }}</li>
+            {% endfor %}
+        </ul>
+        </div>
+    </div>
+    <div class="container graph-section">
+        <h3>Investment Strategy Plot:</h3>
+        <img src="data:image/png;base64,{{ results.plot_url }}" alt="Investment Strategy Plot">
+    {% endif %}
+</div>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+     
+     </div>
+     <footer>
+    <p>&copy; MoneyZZ, a Capstone Project. All rights reserved.</p>
+</footer>
+</body>
+</html>
