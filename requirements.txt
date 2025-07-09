@@ -56,3 +56,4 @@ numpy==1.26.4
 pandas==2.2.2
 yfinance==0.2.40
 spacy==3.7.4
+
