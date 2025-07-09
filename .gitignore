@@ -1,3 +1,5 @@
 .env
 *.json
-.env
+# Ignore Python virtual environments
+.venv/
+venv/
